@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         String heightStr = heightInput.getText().toString();
 
         if (weightStr.isEmpty() || heightStr.isEmpty()) {
-            // ZADANIE 3: AlertDialog zamiast Toast
+
             androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(this);
             builder.setTitle("Błąd walidacji")
                     .setMessage(R.string.error_empty_fields)
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         float heightCm = Float.parseFloat(heightStr);
 
         if (weight <= 0 || heightCm <= 0) {
-            // Tutaj też można zmienić na AlertDialog, ale zostawiam Toast dla różnorodności
+
             Toast.makeText(this, R.string.error_zero_values, Toast.LENGTH_SHORT).show();
             return;
         }

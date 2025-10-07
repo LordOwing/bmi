@@ -48,7 +48,12 @@ public class MainActivity extends AppCompatActivity {
         String heightStr = heightInput.getText().toString();
 
         if (weightStr.isEmpty() || heightStr.isEmpty()) {
-            Toast.makeText(this, R.string.error_empty_fields, Toast.LENGTH_SHORT).show();
+            // ZADANIE 3: AlertDialog zamiast Toast
+            androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(this);
+            builder.setTitle("Błąd walidacji")
+                    .setMessage(R.string.error_empty_fields)
+                    .setPositiveButton("OK", null)
+                    .show();
             return;
         }
 
@@ -56,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         float heightCm = Float.parseFloat(heightStr);
 
         if (weight <= 0 || heightCm <= 0) {
+            // Tutaj też można zmienić na AlertDialog, ale zostawiam Toast dla różnorodności
             Toast.makeText(this, R.string.error_zero_values, Toast.LENGTH_SHORT).show();
             return;
         }
@@ -66,17 +72,20 @@ public class MainActivity extends AppCompatActivity {
         String bmiResultString = String.format("%.2f", bmi);
         String resultPrefix = getResources().getString(R.string.bmi_result_prefix);
         resultText.setText(resultPrefix + " " + bmiResultString);
-        if(bmi<18.5){
+
+
+        if(bmi < 18.5){
             interpretation.setText(getResources().getString(R.string.bmi_under));
-        }else if(bmi<=24.9){
+            interpretation.setTextColor(getResources().getColor(R.color.status_warning, null));
+        } else if(bmi <= 24.9){
             interpretation.setText(getResources().getString(R.string.bmi_normal));
-
-        }else if(bmi<=29.9){
+            interpretation.setTextColor(getResources().getColor(R.color.status_good, null));
+        } else if(bmi <= 29.9){
             interpretation.setText(getResources().getString(R.string.bmi_over));
-
-        }else{
+            interpretation.setTextColor(getResources().getColor(R.color.status_warning, null));
+        } else {
             interpretation.setText(getResources().getString(R.string.bmi_obesity));
+            interpretation.setTextColor(getResources().getColor(R.color.status_bad, null));
         }
-
     }
 }

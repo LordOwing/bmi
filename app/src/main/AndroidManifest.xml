@@ -12,6 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bmi">
         <activity
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:label="Ustawienia" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
